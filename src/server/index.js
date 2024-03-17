@@ -1,4 +1,4 @@
-import "regenerator-runtime/runtime";
+
 import fastify from "fastify";
 import fastifySensible from "fastify-sensible";
 
@@ -15,11 +15,11 @@ const server = fastify({
   logger: IS_PRODUCTION
     ? false
     : {
-        prettyPrint: {
-          ignore: "pid,hostname",
-          translateTime: "SYS:HH:MM:ss",
-        },
+      prettyPrint: {
+        ignore: "pid,hostname",
+        translateTime: "SYS:HH:MM:ss",
       },
+    },
 });
 server.register(fastifySensible);
 
