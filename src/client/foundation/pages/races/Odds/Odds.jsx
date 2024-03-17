@@ -1,4 +1,3 @@
-import moment from "moment-timezone";
 import React, { useCallback, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
@@ -16,6 +15,7 @@ import { jsonFetcher } from "../../../utils/HttpUtils";
 import { OddsRankingList } from "./internal/OddsRankingList";
 import { OddsTable } from "./internal/OddsTable";
 import { TicketVendingModal } from "./internal/TicketVendingModal";
+import dayjs from "dayjs";
 
 const LiveBadge = styled.span`
   background: ${Color.red};
@@ -60,7 +60,7 @@ export const Odds = () => {
     return <Container>Loading...</Container>;
   }
 
-  const isRaceClosed = moment(data.closeAt).isBefore(new Date());
+  const isRaceClosed = dayjs(data.closeAt).isBefore(dayjs());
 
   return (
     <Container>
