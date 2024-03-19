@@ -1,9 +1,9 @@
-import _ from "lodash";
 import { v4 as uuid } from "uuid";
 
 import { Race } from "../src/model/index.js";
 import { createConnection } from "../src/server/typeorm/connection.js";
 import dayjs from "dayjs";
+import { arraySample } from "../src/client/foundation/utils/arraySample.js";
 
 export async function insertRaces(startDate, endDate) {
   const connection = await createConnection();
@@ -66,7 +66,7 @@ export async function insertRaces(startDate, endDate) {
             3,
             "0",
           )}.jpg`,
-          name: _.sample(NAMES),
+          name: arraySample(NAMES),
           startAt: startAt.toDate(),
         }),
       );

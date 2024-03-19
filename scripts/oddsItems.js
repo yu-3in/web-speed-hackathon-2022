@@ -1,8 +1,10 @@
-import _ from "lodash";
+
 import { v4 as uuid } from "uuid";
 
+import { random } from "../src/client/foundation/utils/random.js";
 import { OddsItem, Race, RaceEntry } from "../src/model/index.js";
 import { createConnection } from "../src/server/typeorm/connection.js";
+
 
 export async function insertOddsItems() {
   process.stdout.write("Creating odds items...");
@@ -27,7 +29,7 @@ export async function insertOddsItems() {
             continue;
           }
 
-          const odds = Number(_.random(1.1, 300, true).toFixed(1));
+          const odds = Number(random(1.1, 300, true).toFixed(1));
 
           items.push(
             new OddsItem({
