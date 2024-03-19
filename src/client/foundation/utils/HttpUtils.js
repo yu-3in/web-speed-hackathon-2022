@@ -1,8 +1,14 @@
-import axios from "axios";
-
 export const jsonFetcher = async (/** @type {string} */ url) => {
-  const res = await axios.get(url, { responseType: "json" });
-  return res.data;
+  try {
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error(`Network response was not ok: ${response.statusText}`);
+    }
+    return await response.json();
+  } catch (error) {
+    console.error("Failed to fetch: ", error);
+    throw error;
+  }
 };
 
 /**
@@ -10,9 +16,16 @@ export const jsonFetcher = async (/** @type {string} */ url) => {
  * @param {string} userId
  */
 export const authorizedJsonFetcher = async (url, userId) => {
-  const res = await axios.get(url, {
-    headers: { "x-app-userid": userId },
-    responseType: "json",
-  });
-  return res.data;
+  try {
+    const response = await fetch(url, {
+      headers: { "x-app-userid": userId },
+    });
+    if (!response.ok) {
+      throw new Error(`Network response was not ok: ${response.statusText}`);
+    }
+    return await response.json();
+  } catch (error) {
+    console.error("Failed to fetch with authorization: ", error);
+    throw error;
+  }
 };

@@ -1,4 +1,3 @@
-import axios from "axios";
 import { useCallback, useState } from "react";
 
 import { useAuth } from "../contexts/AuthContext";
@@ -44,16 +43,19 @@ export function useMutation(apiPath, { auth, method }) {
       }));
 
       try {
-        const res = await axios.request({
-          data,
+        const response = await fetch(apiPath, {
+          body: JSON.stringify(data),
           headers: auth
             ? {
-                "x-app-userid": userId,
-              }
+              "x-app-userid": userId,
+            }
             : {},
           method,
-          url: apiPath,
         });
+        if (!response.ok) {
+          throw new Error(`Network response was not ok: ${response.statusText}`);
+        }
+        const res = await response.json();
 
         setResult((cur) => ({
           ...cur,
