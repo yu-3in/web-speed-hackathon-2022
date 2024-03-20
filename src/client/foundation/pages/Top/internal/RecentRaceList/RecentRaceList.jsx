@@ -6,13 +6,15 @@ import { Stack } from "../../../../components/layouts/Stack";
 import { Color, FontSize, Radius, Space } from "../../../../styles/variables";
 import { formatCloseAt } from "../../../../utils/DateUtils";
 
-export const RecentRaceList = ({ children }) => {
+export const RecentRaceList = React.memo(({ children }) => {
   return (
     <Stack as="ul" gap={Space * 2}>
       {children}
     </Stack>
   );
-};
+});
+
+RecentRaceList.displayName = "RecentRaceList";
 
 const fadeIn = keyframes`
   from {
