@@ -131,7 +131,7 @@ export const Top = () => {
   }, [raceData]);
 
   const todayRacesToShow = useTodayRacesWithAnimation(todayRaces);
-  const heroImageUrl = "/assets/images/hero.jpg";
+  const heroImageUrl = "/assets/images/hero.webp";
 
   return (
     <Container>
@@ -148,6 +148,13 @@ export const Top = () => {
           <ChargeButton onClick={handleClickChargeButton}>
             チャージ
           </ChargeButton>
+
+          <Suspense fallback={<></>}>
+            <ChargeDialog
+              ref={chargeDialogRef}
+              onComplete={handleCompleteCharge}
+            />
+          </Suspense>
         </Stack>
       )}
 
@@ -162,10 +169,6 @@ export const Top = () => {
           </RecentRaceList>
         )}
       </section>
-
-      <Suspense fallback={<></>}>
-        <ChargeDialog ref={chargeDialogRef} onComplete={handleCompleteCharge} />
-      </Suspense>
     </Container>
   );
 };

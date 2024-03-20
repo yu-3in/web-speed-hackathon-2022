@@ -52,7 +52,7 @@ const Item = ({ race }) => {
   useEffect(() => {
     const timer = setInterval(() => {
       setCloseAtText(formatCloseAt(race.closeAt));
-    }, 0);
+    }, 100);
 
     return () => {
       clearInterval(timer);
@@ -96,7 +96,7 @@ const Item = ({ race }) => {
               height={100}
               width={100}
               alt=""
-              src={race.image.replace(".jpg", ".jpg")}
+              src={race.image.replace(".jpg", ".webp")}
               style={{ objectFit: "cover" }}
             />
             <RaceButton to={`/races/${race.id}/race-card`}>投票</RaceButton>

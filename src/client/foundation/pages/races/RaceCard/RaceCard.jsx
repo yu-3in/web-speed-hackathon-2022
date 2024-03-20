@@ -50,7 +50,7 @@ export const RaceCard = () => {
           height={225}
           width={400}
           alt=""
-          src={data.image.replace(".jpg", ".jpg")}
+          src={data.image.replace(".jpg", ".webp")}
           style={{ objectFit: "cover" }}
         />
       </Section>
