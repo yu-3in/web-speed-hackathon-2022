@@ -1,6 +1,10 @@
 export const jsonFetcher = async (/** @type {string} */ url) => {
   try {
-    const response = await fetch(url);
+    const response = await fetch(url, {
+      headers: {
+        "Content-Type": "application/json",
+      }
+    });
     if (!response.ok) {
       throw new Error(`Network response was not ok: ${response.statusText}`);
     }
@@ -18,7 +22,10 @@ export const jsonFetcher = async (/** @type {string} */ url) => {
 export const authorizedJsonFetcher = async (url, userId) => {
   try {
     const response = await fetch(url, {
-      headers: { "x-app-userid": userId },
+      headers: {
+        "Content-Type": "application/json",
+        "x-app-userid": userId,
+      },
     });
     if (!response.ok) {
       throw new Error(`Network response was not ok: ${response.statusText}`);

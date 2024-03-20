@@ -47,6 +47,7 @@ export function useMutation(apiPath, { auth, method }) {
           body: JSON.stringify(data),
           headers: auth
             ? {
+              "Content-Type": "application/json",
               "x-app-userid": userId,
             }
             : {},

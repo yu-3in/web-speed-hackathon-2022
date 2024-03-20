@@ -48,7 +48,9 @@ export const useRegister = () => {
 
   const register = useCallback(async () => {
     try {
-      const response = await fetch("/api/users/me");
+      const response = await fetch("/api/users/me", {
+        "Content-Type": "application/json",
+      });
       if (!response.ok) {
         throw new Error(response.statusText);
       }
