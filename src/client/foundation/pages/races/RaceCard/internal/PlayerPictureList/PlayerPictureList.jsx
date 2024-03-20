@@ -28,11 +28,12 @@ const Item = ({ image, name, number }) => {
   return (
     <Stack gap={Space * 1}>
       <img
-        height={100}
-        width={100}
         alt={`${name}選手のプロフィール写真`}
+        height={100}
+        loading="lazy"
         src={image.replace(".jpg", ".webp")}
         style={{ objectFit: "cover" }}
+        width={100}
       />
 
       <Stack horizontal alignItems="center" gap={Space / 2} wrap="wrap">
