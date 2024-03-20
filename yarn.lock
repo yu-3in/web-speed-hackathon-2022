@@ -2482,6 +2482,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@welldone-software/why-did-you-render@npm:^8.0.1":
+  version: 8.0.1
+  resolution: "@welldone-software/why-did-you-render@npm:8.0.1"
+  dependencies:
+    lodash: ^4
+  peerDependencies:
+    react: ^18
+  checksum: cabb08e49a241b44208fc2acc60c34af2885b98feaa3e80c21b34d45c77cac72c83fc914645cc1cfa253b4a6272ac6d21327ec76d4c54b5b9387d8be576240c9
+  languageName: node
+  linkType: hard
+
 "@xtuc/ieee754@npm:^1.2.0":
   version: 1.2.0
   resolution: "@xtuc/ieee754@npm:1.2.0"
@@ -6604,7 +6615,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lodash@npm:^4.17.21":
+"lodash@npm:^4, lodash@npm:^4.17.21":
   version: 4.17.21
   resolution: "lodash@npm:4.17.21"
   checksum: eb835a2e51d381e561e508ce932ea50a8e5a68f4ebdd771ea240d3048244a8d13658acbd502cd4829768c56f2e16bdd4340b9ea141297d472517b83868e677f7
@@ -10427,6 +10438,7 @@ __metadata:
     "@types/styled-components": ^5.1.19
     "@typescript-eslint/eslint-plugin": ^5.40.1
     "@typescript-eslint/parser": ^5.40.1
+    "@welldone-software/why-did-you-render": ^8.0.1
     babel-loader: ^8.2.3
     babel-plugin-styled-components: ^2.1.4
     bezier-easing: ^2.1.0

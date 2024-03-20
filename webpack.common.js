@@ -37,7 +37,14 @@ module.exports = {
                   spec: true,
                 },
               ],
-              "@babel/preset-react",
+              [
+                '@babel/preset-react',
+                {
+                  development: process.env.NODE_ENV === 'development',
+                  importSource: '@welldone-software/why-did-you-render',
+                  runtime: 'automatic',
+                }
+              ]
             ],
           },
         },
@@ -52,7 +59,6 @@ module.exports = {
     new CopyPlugin({
       patterns: [{ from: PUBLIC_ROOT, to: DIST_PUBLIC }],
     }),
-    "babel-plugin-styled-components"
   ],
   resolve: {
     extensions: [".js", ".jsx"],
