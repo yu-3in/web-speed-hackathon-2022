@@ -52,6 +52,7 @@ module.exports = {
     new CopyPlugin({
       patterns: [{ from: PUBLIC_ROOT, to: DIST_PUBLIC }],
     }),
+    "babel-plugin-styled-components"
   ],
   resolve: {
     extensions: [".js", ".jsx"],
