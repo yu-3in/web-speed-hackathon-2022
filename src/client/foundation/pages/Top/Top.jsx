@@ -4,6 +4,7 @@ import React, {
   Suspense,
   useCallback,
   useEffect,
+  useMemo,
   useRef,
   useState,
 } from "react";
@@ -17,7 +18,6 @@ import { Heading } from "../../components/typographies/Heading";
 import { useAuthorizedFetch } from "../../hooks/useAuthorizedFetch";
 import { useFetch } from "../../hooks/useFetch";
 import { Color, Radius, Space } from "../../styles/variables";
-import { isSameDay } from "../../utils/DateUtils";
 import { authorizedJsonFetcher, jsonFetcher } from "../../utils/HttpUtils";
 import { difference } from "../../utils/difference";
 
@@ -88,7 +88,11 @@ function useTodayRacesWithAnimation(races) {
 /** @type {React.VFC} */
 export const Top = () => {
   const { date = dayjs().format("YYYY-MM-DD") } = useParams();
+  // sinceDateは一日の開始時刻
+  const since = dayjs(date).startOf("day").unix();
+  const until = dayjs(date).endOf("day").unix();
 
+  // TODO: styled-components辞めたい
   const ChargeButton = styled.button`
     background: ${Color.mono[700]};
     border-radius: ${Radius.MEDIUM};
@@ -107,7 +111,10 @@ export const Top = () => {
     authorizedJsonFetcher,
   );
 
-  const { data: raceData } = useFetch("/api/races", jsonFetcher);
+  const { data: raceData } = useFetch(
+    `/api/races?since=${since}&until=${until}`,
+    jsonFetcher,
+  );
 
   const handleClickChargeButton = useCallback(() => {
     if (chargeDialogRef.current === null) {
@@ -121,17 +128,10 @@ export const Top = () => {
     revalidate();
   }, [revalidate]);
 
-  const todayRaces =
-    raceData != null
-      ? [...raceData.races]
-          .sort(
-            (/** @type {Model.Race} */ a, /** @type {Model.Race} */ b) =>
-              dayjs(a.startAt) - dayjs(b.startAt),
-          )
-          .filter((/** @type {Model.Race} */ race) =>
-            isSameDay(race.startAt, date),
-          )
-      : [];
+  const todayRaces = useMemo(() => {
+    return raceData != null ? raceData.races : [];
+  }, [raceData]);
+
   const todayRacesToShow = useTodayRacesWithAnimation(todayRaces);
   const heroImageUrl = "/assets/images/hero.webp";
 
