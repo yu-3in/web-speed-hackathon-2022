@@ -55,7 +55,7 @@ export const RaceResult = () => {
           height={225}
           width={400}
           alt=""
-          src={data.image.replace(".jpg", ".webp")}
+          src={data.image.replace(".jpg", ".jpg")}
           style={{ objectFit: "cover" }}
         />
       </Section>

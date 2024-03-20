@@ -31,7 +31,7 @@ const Item = ({ image, name, number }) => {
         height={100}
         width={100}
         alt={`${name}選手のプロフィール写真`}
-        src={image.replace(".jpg", ".webp")}
+        src={image.replace(".jpg", ".jpg")}
         style={{ objectFit: "cover" }}
       />
 

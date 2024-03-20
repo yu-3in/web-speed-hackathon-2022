@@ -3,13 +3,12 @@ import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
 import { Between, LessThanOrEqual, MoreThanOrEqual } from "typeorm";
 
-import { assets } from "../../client/foundation/utils/UrlUtils.js";
 import { BettingTicket, Race, User } from "../../model/index.js";
 import { createConnection } from "../typeorm/connection.js";
 import { initialize } from "../typeorm/initialize.js";
 
 
-dayjs.extend(utc)
+dayjs.extend(utc);
 
 /**
  * @type {import('fastify').FastifyPluginCallback}
@@ -44,13 +43,6 @@ export const apiRoute = async (fastify) => {
     res.status(204).send();
   });
 
-  fastify.get("/hero", async (_req, res) => {
-    const url = assets("/images/hero.webp");
-    const hash = Math.random().toFixed(10).substring(2);
-
-    res.send({ hash, url });
-  });
-
   fastify.get("/races", async (req, res) => {
     const since =
       req.query.since != null ? dayjs.unix(req.query.since) : undefined;
@@ -70,17 +62,17 @@ export const apiRoute = async (fastify) => {
     if (since != null && until != null) {
       Object.assign(where, {
         startAt: Between(
-          since.format("YYYY-MM-DD HH:mm:ss"),
-          until.format("YYYY-MM-DD HH:mm:ss"),
+          since.utc().format("YYYY-MM-DD HH:mm:ss"),
+          until.utc().format("YYYY-MM-DD HH:mm:ss"),
         ),
       });
     } else if (since != null) {
       Object.assign(where, {
-        startAt: MoreThanOrEqual(since.format("YYYY-MM-DD HH:mm:ss")),
+        startAt: MoreThanOrEqual(since.utc().format("YYYY-MM-DD HH:mm:ss")),
       });
     } else if (until != null) {
       Object.assign(where, {
-        startAt: LessThanOrEqual(since.format("YYYY-MM-DD HH:mm:ss")),
+        startAt: LessThanOrEqual(since.utc().format("YYYY-MM-DD HH:mm:ss")),
       });
     }
 

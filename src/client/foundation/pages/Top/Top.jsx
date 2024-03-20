@@ -85,24 +85,22 @@ function useTodayRacesWithAnimation(races) {
   return racesToShow;
 }
 
-/** @type {React.VFC} */
+// TODO: styled-components辞めたい
+const ChargeButton = styled.button`
+  background: ${Color.mono[700]};
+  border-radius: ${Radius.MEDIUM};
+  color: ${Color.mono[0]};
+  padding: ${Space * 1}px ${Space * 2}px;
+
+  &:hover {
+    background: ${Color.mono[800]};
+  }
+`;
+
 export const Top = () => {
   const { date = dayjs().format("YYYY-MM-DD") } = useParams();
-  // sinceDateは一日の開始時刻
   const since = dayjs(date).startOf("day").unix();
   const until = dayjs(date).endOf("day").unix();
-
-  // TODO: styled-components辞めたい
-  const ChargeButton = styled.button`
-    background: ${Color.mono[700]};
-    border-radius: ${Radius.MEDIUM};
-    color: ${Color.mono[0]};
-    padding: ${Space * 1}px ${Space * 2}px;
-
-    &:hover {
-      background: ${Color.mono[800]};
-    }
-  `;
 
   const chargeDialogRef = useRef(null);
 
@@ -133,7 +131,7 @@ export const Top = () => {
   }, [raceData]);
 
   const todayRacesToShow = useTodayRacesWithAnimation(todayRaces);
-  const heroImageUrl = "/assets/images/hero.webp";
+  const heroImageUrl = "/assets/images/hero.jpg";
 
   return (
     <Container>
